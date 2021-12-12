@@ -13,6 +13,8 @@ func GetChangeLogs(prev, currentTag string, level log.Level) (string, error) {
 	if currentTag == "" {
 		return "", errors.New("current tag is null")
 	}
+	//git tags
+	_, _ = Run("fetch", "--tags")
 	if prev == "" {
 		previous, _ := GetPreviousTag(currentTag)
 		if previous == "" {
