@@ -3,11 +3,13 @@ package git
 import (
 	"errors"
 	"fmt"
+	"github.com/apex/log"
 	"regexp"
 )
 
 // GetChangeLogs get git previous tag to  current tag  change logs
-func GetChangeLogs(prev, currentTag string) (string, error) {
+func GetChangeLogs(prev, currentTag string, level log.Level) (string, error) {
+	log.SetLevel(level)
 	if currentTag == "" {
 		return "", errors.New("current tag is null")
 	}
@@ -20,6 +22,8 @@ func GetChangeLogs(prev, currentTag string) (string, error) {
 				return "", err
 			}
 			prev = result
+		} else {
+			prev = previous
 		}
 	}
 

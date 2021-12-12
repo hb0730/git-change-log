@@ -1,29 +1,28 @@
 package git
 
-import "testing"
+import (
+	"github.com/apex/log"
+	"testing"
+)
 
 func TestGetChangeLogs(t *testing.T) {
-	type args struct {
-		currentTag string
-	}
 	tests := []struct {
 		name    string
-		args    args
+		args    string
 		want    string
 		wantErr bool
 	}{
 		// TODO: Add test cases.
+		{name: "test", args: "v1.0.0.03-beta", wantErr: false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := GetChangeLogs("", tt.args.currentTag)
+			got, err := GetChangeLogs("", tt.args, log.DebugLevel)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetChangeLogs() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if got != tt.want {
-				t.Errorf("GetChangeLogs() got = %v, want %v", got, tt.want)
-			}
+			t.Log(got)
 		})
 	}
 }
