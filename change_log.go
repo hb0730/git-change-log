@@ -12,10 +12,7 @@ func GetChangeLogs(prev, currentTag string) (string, error) {
 		return "", errors.New("current tag is null")
 	}
 	if prev == "" {
-		prev, err := GetPreviousTag(currentTag)
-		if err != nil {
-			return "", err
-		}
+		prev, _ := GetPreviousTag(currentTag)
 		if prev == "" {
 			// get first commit
 			result, err := Clean(Run("rev-list", "--max-parents=0", "HEAD"))
