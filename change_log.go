@@ -6,6 +6,7 @@ import (
 	"regexp"
 )
 
+// GetChangeLogs get git previous tag to  current tag  change logs
 func GetChangeLogs(prev, currentTag string) (string, error) {
 	if currentTag == "" {
 		return "", errors.New("current tag is null")
@@ -30,6 +31,7 @@ func GetChangeLogs(prev, currentTag string) (string, error) {
 
 var validSHA1 = regexp.MustCompile(`^[a-fA-F0-9]{40}$`)
 
+// Log get git previous tag to  current tag  change logs
 func Log(prev, current string) (string, error) {
 	args := []string{"log", "--pretty=oneline", "--abbrev-commit", "--no-decorate", "--no-color"}
 	if validSHA1.MatchString(prev) {
